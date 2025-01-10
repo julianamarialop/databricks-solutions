@@ -21,8 +21,8 @@ vsam_path = f"{caminho_arquivo}/{nome_arquivo}"
 if not caminho_arquivo or not nome_arquivo or not schema_destino or not nome_tabela_destino:
     raise ValueError("Todos os parâmetros devem ser preenchidos.")
 
-# Supondo que o arquivo VSAM seja um arquivo CSV
-df_vsam = spark.read.format("csv").option("header", "true").load(vsam_path)
+# Supondo que o arquivo VSAM seja um arquivo CSV em EBCDIC
+df_vsam = spark.read.format("csv").option("header", "true").option("encoding", "cp037").load(vsam_path)
 
 # Exibir o DataFrame lido
 display(df_vsam)
